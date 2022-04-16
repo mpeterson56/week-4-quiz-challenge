@@ -1,7 +1,10 @@
 
 
+
+
 (function(){
-  
+  var timeLeft = 60;
+  var userAnswer = "";
   function buildQuiz(){     
       const output = [];  
      
@@ -34,7 +37,7 @@
     }
   
     function showResults(){
-        
+      let score= timeLeft;
       const answerContainers = quizContainer.querySelectorAll('.answers');
        
       let numCorrect = 0;
@@ -43,10 +46,10 @@
         
         const answerContainer = answerContainers[questionNumber];
         const selector = `input[name=question${questionNumber}]:checked`;
-        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+         userAnswer = (answerContainer.querySelector(selector) || {}).value;
        
         if(userAnswer === currentQuestion.correctAnswer){
-         
+         score += 10 ;
           numCorrect++;
           
           
@@ -54,11 +57,13 @@
         }
         else{
           answerContainers[questionNumber].style.color = 'red';
-          
+          score-= 10;
         }
+
       });
-  
-      resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}` ;
+     
+      resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length} with ${score}seconds` ;
+       
     }
   
     function showSlide(n) {
@@ -74,6 +79,7 @@
       if(currentSlide === slides.length-1){
         nextButton.style.display = 'none';
         submitButton.style.display = 'inline-block';
+
       }
       else{
         nextButton.style.display = 'inline-block';
@@ -83,6 +89,7 @@
   
     function showNextSlide() {
       showSlide(currentSlide + 1);
+      
     }
   
     function showPreviousSlide() {
@@ -93,6 +100,7 @@
     const quizContainer = document.getElementById('quiz');
     const resultsContainer = document.getElementById('results');
     const submitButton = document.getElementById('submit');
+   //quiz questions and answers
     var myQuestions = [
         {
             question: "the condition in an if/else statement is enclosed with _______.",
@@ -151,10 +159,11 @@
     ];
     
    
+   
     buildQuiz();
-  
+    countdown();
 
-countdown();
+
     const previousButton = document.getElementById("previous");
     const nextButton = document.getElementById("next");
     const slides = document.querySelectorAll(".slide");
@@ -165,28 +174,34 @@ countdown();
   
   
     submitButton.addEventListener('click', showResults);
+
+
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);
-  })();
-  var timerEl = document.getElementById('countdown');
-  function countdown() {
-    var timeLeft = 60;
   
-    // TODO: sets up if statements for the setinterval function of 1000 
-    var timeInterval = setInterval(function () {
-      // TODO: if time is left is greater then 1 will dispalay amount of seconds counting down
-      if (timeLeft > 1) {
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        timeLeft--;
-      } // TODO: if time is exactly 1 will display 1 second remaining
-      else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } // TODO: when countdown stops words will appear in 1 second intervals
-      else {
-        timerEl.textContent = '';
-        clearInterval(timeInterval);
-        
-      }
-    }, 1000);
-  }
+    var timerEl = document.getElementById('countdown');
+    function countdown() {
+     
+    
+      // TODO: sets up if statements for the setinterval function of 1000 
+      var timeInterval = setInterval(function () {
+        // TODO: if time is left is greater then 1 will dispalay amount of seconds counting down
+        if (timeLeft > 1) {
+          timerEl.textContent = timeLeft + ' seconds remaining';
+          timeLeft--;
+        } // TODO: if time is exactly 1 will display 1 second remaining
+        else if (timeLeft === 1) {
+          timerEl.textContent = timeLeft + ' second remaining';
+          timeLeft--;
+        } // TODO: when countdown stops words will appear in 1 second intervals
+        else {
+          timerEl.textContent = '';
+          clearInterval(timeInterval);
+          
+        }
+      }, 1000);
+    }
+  })();
+  
+ 
+ 
