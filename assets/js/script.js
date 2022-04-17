@@ -1,5 +1,8 @@
 
+var save = function() {
+  localStorage.setItem("resultsContainer", JSON.stringify(resultsContainer));
 
+};
 
 
 (function(){
@@ -61,9 +64,17 @@
         }
 
       });
+     var name = window.prompt("Add your Name for your score!");
+      resultsContainer.innerHTML = `${name} ${numCorrect} out of ${myQuestions.length} with ${score}seconds` ;
+      
+      
+      var save = function() {
+        localStorage.setItem("resultsContainer.innerHTML", JSON.stringify(resultsContainer.innerHTML));
+        
+      };
+      
      
-      resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length} with ${score}seconds` ;
-       
+      save();
     }
   
     function showSlide(n) {
