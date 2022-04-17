@@ -151,7 +151,7 @@ var save = function() {
                 c: 'quotes',
                 d: 'parenthesis'
             },
-            correctAnswer: 'b'
+            correctAnswer: 'c'
         },
         {
             question: "a very useful tool during development and debugging for printing content to the debugger is:",
@@ -161,7 +161,7 @@ var save = function() {
                 c: 'for loops',
                 d: 'console.log'
             },
-            correctAnswer: 'c'
+            correctAnswer: 'd'
         },
     
     
